@@ -5,7 +5,7 @@ class DBManager(DBMongo):
     _instance = None
 
     def __init__(self):
-        super().__init__(db_name="wando_test")
+        super().__init__(db_name="admin")
 
     @classmethod
     def get_instance(cls):

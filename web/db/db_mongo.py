@@ -4,6 +4,8 @@ import pymongo
 
 from pymongo import database, MongoClient, errors
 
+from web.db import settings
+
 
 def db_transaction(mongo_func):
     @wraps(mongo_func)
@@ -24,7 +26,11 @@ class DBMongo(object):
     def connect(self):
         if not self.client:
             try:
-                self.client = MongoClient()
+                self.client = MongoClient(settings.MONGO_ADDRESS,
+                                          port=int(settings.MONGO_PORT),
+                                          username=settings.MONGO_USERNAME,
+                                          password=settings.MONGO_PASSWORD,
+                                          serverSelectionTimeoutMS=10000)
             except pymongo.errors.ServerSelectionTimeoutError as er:
                 print(str(er))  # TODO 로깅으로 변경
             self.my_db = self.client[self.db_name]
@@ -32,3 +38,10 @@ class DBMongo(object):
     def close(self):
         if self.client:
             self.client.close()
+
+    @db_transaction
+    def find_one(self, collection: str, where: dict = None, projection: dict = None) -> dict:
+        document = self.my_db[collection].find_one(filter=where, projection=projection)
+        if not document:
+            print(f"No DB data in {collection} where {where}")
+        return document
