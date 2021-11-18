@@ -1,21 +1,20 @@
-import json
-
-import pytest
-
-from web import app
+from web.tests.data.user_dummy_data import get_user_fail_empty_time, get_user_fail_wrong_time
+from web.user.user_handler import UserHandler
 
 
-@pytest.fixture
-def api():
-    test_api = app.app
-    api = test_api.test_client()
+def test_user_verify_fail_empty_time():
+    request_data = get_user_fail_empty_time()
 
-    return api
+    handler = UserHandler(request=request_data)
+    verify_result = handler.verify_request_data()
+
+    assert verify_result == False
 
 
-def test_get_response_dict(api):
-    result = api.post("/user")
-    print(result)
-    data = json.loads(result.data.decode('utf-8'))
-    print(data)
-    assert type(data) == dict
+def test_user_verify_fail_empty_time():
+    request_data = get_user_fail_wrong_time()
+
+    handler = UserHandler(request=request_data)
+    verify_result = handler.verify_request_data()
+
+    assert verify_result == False
