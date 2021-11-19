@@ -29,3 +29,14 @@ def get_user_fail_wrong_time():
         "quizCount": 4,
         "isSound": True
     }
+
+
+def get_user_fail_empty_day_of_week():
+    return {
+        "alarmName": "모닝 알람",
+        "time": "05:30",
+        "dayOfWeek": [],
+        "category": "상식",  # TODO 상수로 변경
+        "quizCount": 4,
+        "isSound": True
+    }

@@ -20,4 +20,9 @@ class UserHandler:
         if len(divide_times[0]) > 2 or len(divide_times[1]) > 2:
             return False
 
+        # 요일 체크
+        day_of_weeks = args.get("dayOfWeek")
+        if len(day_of_weeks) < 1:
+            return False
+
         return True
