@@ -40,3 +40,25 @@ def get_user_fail_empty_day_of_week():
         "quizCount": 4,
         "isSound": True
     }
+
+
+def get_user_fail_none_category():
+    return {
+        "alarmName": "모닝 알람",
+        "time": "05:30",
+        "dayOfWeek": ["화", "수", "목", "금"],
+        "category": None,  # TODO 상수로 변경
+        "quizCount": 4,
+        "isSound": True
+    }
+
+
+def get_user_fail_blank_category():
+    return {
+        "alarmName": "모닝 알람",
+        "time": "05:30",
+        "dayOfWeek": ["화", "수", "목", "금"],
+        "category": "",  # TODO 상수로 변경
+        "quizCount": 4,
+        "isSound": True
+    }

@@ -25,4 +25,9 @@ class UserHandler:
         if len(day_of_weeks) < 1:
             return False
 
+        # 카테고리 체크
+        category = args.get("category")
+        if not category:
+            return False
+
         return True
