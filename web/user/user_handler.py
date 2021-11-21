@@ -1,3 +1,5 @@
+from requests import RequestException
+
 
 class UserHandler:
 
@@ -5,15 +7,18 @@ class UserHandler:
         self.request = request
 
     def register_user(self):
+        # 리퀘스트 체크
+        if not self.verify_request_data():
+            return {"return_code": 401, "message": "요청 데이터가 잘못 되었습니다. 다시 확인해주세요."}
+
         pass
 
     def verify_request_data(self) -> bool:
         if not self.request:
             return False
-        # args = self.request.args
-        args = self.request
+        json_data = self.request.json
         # 시간 체크
-        request_time = args.get("time")
+        request_time = json_data.get("time")
         if not request_time:
             notice_error_field("time")
             return False
@@ -23,13 +28,13 @@ class UserHandler:
             return False
 
         # 요일 체크
-        day_of_weeks = args.get("dayOfWeek")
+        day_of_weeks = json_data.get("dayOfWeek")
         if len(day_of_weeks) < 1:
             notice_error_field("dayOfWeek")
             return False
 
         # 카테고리 체크
-        category = args.get("category")
+        category = json_data.get("category")
         if not category:
             notice_error_field("category")
             return False
