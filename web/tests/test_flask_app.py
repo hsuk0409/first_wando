@@ -23,7 +23,7 @@ def test_init_app(api):
 
 def test_get_response_dict(api):
     result = api.post("/user")
-    data = json.loads(result.data.decode('utf-8'))
+    data = result.json
     assert type(data) == dict
 
 

@@ -1,6 +1,3 @@
-from requests import RequestException
-
-
 class UserHandler:
 
     def __init__(self, request):
@@ -14,9 +11,9 @@ class UserHandler:
         pass
 
     def verify_request_data(self) -> bool:
-        if not self.request:
-            return False
         json_data = self.request.json
+        if not json_data:
+            return False
         # 시간 체크
         request_time = json_data.get("time")
         if not request_time:
