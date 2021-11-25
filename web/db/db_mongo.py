@@ -26,11 +26,12 @@ class DBMongo(object):
     def connect(self):
         if not self.client:
             try:
-                self.client = MongoClient(settings.MONGO_ADDRESS,
-                                          port=int(settings.MONGO_PORT),
-                                          username=settings.MONGO_USERNAME,
-                                          password=settings.MONGO_PASSWORD,
-                                          serverSelectionTimeoutMS=10000)
+                # self.client = MongoClient(settings.MONGO_ADDRESS,
+                #                           port=int(settings.MONGO_PORT),
+                #                           username=settings.MONGO_USERNAME,
+                #                           password=settings.MONGO_PASSWORD,
+                #                           serverSelectionTimeoutMS=10000)
+                self.client = MongoClient(host='localhost', port=27017)
             except pymongo.errors.ServerSelectionTimeoutError as er:
                 print(str(er))  # TODO 로깅으로 변경
             self.my_db = self.client[self.db_name]
