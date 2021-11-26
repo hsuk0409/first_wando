@@ -1,7 +1,7 @@
 class UserHandler:
 
     def __init__(self, request):
-        self.request_data = request.json()
+        self.request_data = request.json
 
     def register_user(self):
         # 리퀘스트 체크
