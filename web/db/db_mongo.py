@@ -46,3 +46,15 @@ class DBMongo(object):
         if not document:
             print(f"No DB data in {collection} where {where}")
         return document
+
+    @db_transaction
+    def insert_one(self, collection: str, document: dict):
+        result = self.my_db[collection].insert_one(document=document)
+        return result
+
+    @db_transaction
+    def delete_many(self, collection: str, where: dict = None):
+        result = self.my_db[collection].delete_many(where)
+        if result.deleted_count < 1:
+            print(f"Delete Count < 1")
+        return result

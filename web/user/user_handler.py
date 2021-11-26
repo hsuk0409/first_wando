@@ -1,14 +1,19 @@
+from web.db.db_manager import DBManager
+
+
 class UserHandler:
 
     def __init__(self, request):
         self.request_data = request.json
+        self.dbm = DBManager.get_instance()
 
     def register_user(self):
         # 리퀘스트 체크
         if not verify_request_data(self.request_data):
             return {"return_code": 401, "message": "요청 데이터가 잘못 되었습니다. 다시 확인해주세요."}
 
-        pass
+        result = self.dbm.insert_one(collection="wando_test", document=self.request_data)
+        print(f"[Register User] DB Insert Result:; {result}")
 
 
 def verify_request_data(data_to_be_verified: dict) -> bool:
