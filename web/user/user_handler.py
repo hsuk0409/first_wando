@@ -1,42 +1,43 @@
 class UserHandler:
 
     def __init__(self, request):
-        self.request = request
+        self.request_data = request.json()
 
     def register_user(self):
         # 리퀘스트 체크
-        if not self.verify_request_data():
+        if not verify_request_data(self.request_data):
             return {"return_code": 401, "message": "요청 데이터가 잘못 되었습니다. 다시 확인해주세요."}
 
         pass
 
-    def verify_request_data(self) -> bool:
-        json_data = self.request.json
-        if not json_data:
-            return False
-        # 시간 체크
-        request_time = json_data.get("time")
-        if not request_time:
-            notice_error_field("time")
-            return False
-        divide_times = str(request_time).split(":")
-        if len(divide_times[0]) > 2 or len(divide_times[1]) > 2:
-            notice_error_field("time")
-            return False
 
-        # 요일 체크
-        day_of_weeks = json_data.get("dayOfWeek")
-        if len(day_of_weeks) < 1:
-            notice_error_field("dayOfWeek")
-            return False
+def verify_request_data(data_to_be_verified: dict) -> bool:
+    json_data = data_to_be_verified
+    if not json_data:
+        return False
+    # 시간 체크
+    request_time = json_data.get("time")
+    if not request_time:
+        notice_error_field("time")
+        return False
+    divide_times = str(request_time).split(":")
+    if len(divide_times[0]) > 2 or len(divide_times[1]) > 2:
+        notice_error_field("time")
+        return False
 
-        # 카테고리 체크
-        category = json_data.get("category")
-        if not category:
-            notice_error_field("category")
-            return False
+    # 요일 체크
+    day_of_weeks = json_data.get("dayOfWeek")
+    if len(day_of_weeks) < 1:
+        notice_error_field("dayOfWeek")
+        return False
 
-        return True
+    # 카테고리 체크
+    category = json_data.get("category")
+    if not category:
+        notice_error_field("category")
+        return False
+
+    return True
 
 
 def notice_error_field(filed_name: str) -> None:
