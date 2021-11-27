@@ -1,6 +1,5 @@
 from web.tests.data.user_dummy_data import get_user_fail_empty_time, get_user_fail_wrong_time, \
-    get_user_fail_empty_day_of_week, get_user_fail_none_category, get_user_fail_blank_category, \
-    get_user_success_dummy_data
+    get_user_fail_empty_day_of_week, get_user_fail_none_category, get_user_fail_blank_category
 from web.user.user_handler import verify_request_data
 
 

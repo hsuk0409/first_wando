@@ -1,5 +1,3 @@
-from json import dumps
-
 import pytest
 
 from web import app
