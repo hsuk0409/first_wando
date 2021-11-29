@@ -15,6 +15,8 @@ class UserHandler:
         result = self.dbm.insert_one(collection="wando_test", document=self.request_data)
         print(f"[Register User] DB Insert Result:; {result}")
 
+        
+
 
 def verify_request_data(data_to_be_verified: dict) -> bool:
     json_data = data_to_be_verified

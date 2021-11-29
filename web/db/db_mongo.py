@@ -1,10 +1,7 @@
 from functools import wraps
 
 import pymongo
-
 from pymongo import database, MongoClient, errors
-
-from web.db import settings
 
 
 def db_transaction(mongo_func):
