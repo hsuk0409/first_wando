@@ -18,8 +18,15 @@ class UserScheduler:
             print(f"fail to stop scheduler: {str(e)}")
             return
 
-    def do_something(self, job_type: str, job_id: str) -> None:
+    def do_something(self, category: str, quiz_count: int) -> None:
+        # TODO 카테고리에 대한 문제 셋팅해서 push 호출
         print(f"Do something")
 
-    def make_scheduler(self, job_type: str, job_id: str, category: str, quiz_count: int) -> None:
-        print(f"Set scheduler")
+    def make_scheduler(self, job_id: str, category: str, quiz_count: int) -> None:
+        print(f"[Set scheduler] jobId: {job_id}")
+        job_type = "cron"
+
+        # TODO 유저 정보 불러와서 day_of_week, hour, minute 설정
+        self.scheduler_obj.add_job(func=self.do_something(category=category, quiz_count=quiz_count),
+                                   trigger=job_type, id=job_id, args=(job_type, job_id),
+                                   day_of_week="", hour="", minute="")
