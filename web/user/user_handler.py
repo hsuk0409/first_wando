@@ -1,4 +1,5 @@
 from web.db.db_manager import DBManager
+from web.user.user_scheduler import UserScheduler
 
 
 class UserHandler:
@@ -12,10 +13,11 @@ class UserHandler:
         if not verify_request_data(self.request_data):
             return {"return_code": 401, "message": "요청 데이터가 잘못 되었습니다. 다시 확인해주세요."}
 
-        result = self.dbm.insert_one(collection="wando_test", document=self.request_data)
-        print(f"[Register User] DB Insert Result:; {result}")
+        user_id = self.dbm.insert_one(collection="wando_test", document=self.request_data)
+        print(f"[Register User] DB Insert Result:; {user_id}")
 
-        
+        scheduler = UserScheduler(user_id=user_id)
+        scheduler.make_scheduler()
 
 
 def verify_request_data(data_to_be_verified: dict) -> bool:

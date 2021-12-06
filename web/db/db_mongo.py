@@ -46,7 +46,7 @@ class DBMongo(object):
 
     @db_transaction
     def insert_one(self, collection: str, document: dict):
-        result = self.my_db[collection].insert_one(document=document)
+        result = self.my_db[collection].insert_one(document=document).inserted_id
         return result
 
     @db_transaction
