@@ -47,5 +47,5 @@ class UserScheduler:
 
 
 def convert_day_of_week(day_of_week_list: list) -> str:
-    # TODO
+    # TODO day_of_week 리스트를 scheduler.add_job day_of_week 파라미터 포맷에 맞춰서 컨버팅한다.
     return ""
