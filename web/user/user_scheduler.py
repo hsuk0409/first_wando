@@ -24,24 +24,28 @@ class UserScheduler:
             print(f"fail to stop scheduler: {str(e)}")
             return
 
-    def do_something(self, category: str, quiz_count: int) -> None:
+    def _make_quiz(self, category: str, quiz_count: int, fcm_token: str) -> None:
         # TODO 카테고리에 대한 문제 셋팅해서 push 호출
         print(f"Do something")
 
     def make_scheduler(self) -> None:
         print(f"[Set scheduler] user_id: {self.user_id}")
-        job_type = "cron"
-        job_id = self.user_id
 
         user = dbm.find_one(collection="WANDO_USER", where={"_id": ObjectId(self.user_id)})
         category = user.get("category")
-        quiz_count = user.get("quiz_count")
-        converted_day_of_week = convert_day_of_week(day_of_week_list=user.get("day_of_week"))
+        quiz_count = user.get("quizCount")
+        fcm_token = user.get("fcmToken")
+        converted_day_of_week = convert_day_of_week(day_of_week_list=user.get("dayOfWeek"))
+
         time_str = user.get("time")
         hour = str(time_str).split(":")[0]
         minute = str(time_str).split(":")[1]
 
-        self.scheduler_obj.add_job(func=self.do_something(category=category, quiz_count=quiz_count),
+        job_type = "cron"
+        job_id = self.user_id
+        self.scheduler_obj.add_job(func=self._make_quiz(category=category,
+                                                        quiz_count=quiz_count,
+                                                        fcm_token=fcm_token),
                                    trigger=job_type, id=job_id, args=(job_type, job_id),
                                    day_of_week=converted_day_of_week, hour=hour, minute=minute)
 
