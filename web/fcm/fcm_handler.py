@@ -9,9 +9,8 @@ class FcmHandler:
         self.fcm_service = FCMNotification(api_key=settings.FCM_API_KEY)
         self.token = token
 
-    def send_message(self, title: str, message_body: dict):
+    def send_message(self, message_body: dict):
         data_message = {
-            "title": title,
             "body": message_body
         }
 
