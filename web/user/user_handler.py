@@ -9,7 +9,6 @@ class UserHandler:
         self.dbm = DBManager.get_instance()
 
     def register_user(self):
-        # 리퀘스트 체크
         if not verify_request_data(self.request_data):
             return {"return_code": 401, "message": "요청 데이터가 잘못 되었습니다. 다시 확인해주세요."}
 
