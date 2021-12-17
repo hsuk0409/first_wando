@@ -52,7 +52,7 @@ class UserScheduler:
 
 
 def convert_day_of_week(day_of_week_list: list) -> str:
-    matching_dic = {
+    convert_dic = {
         "월": 0,
         "화": 1,
         "수": 2,
@@ -62,5 +62,4 @@ def convert_day_of_week(day_of_week_list: list) -> str:
         "일": 6
     }
 
-    
-    return ""
+    return "0-6"
