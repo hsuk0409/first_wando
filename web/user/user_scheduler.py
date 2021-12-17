@@ -33,9 +33,9 @@ class UserScheduler:
             return
 
     def _make_quiz(self) -> None:
-        # TODO 카테고리에 대한 문제 셋팅
         request_body = {}
-
+        # TODO 카테고리에 대한 문제 셋팅
+        
         # 파이어베이스 푸시 알림 전송
         fcm_service = FcmHandler(token=self.fcm_token)
         fcm_service.send_message(message_body=request_body)

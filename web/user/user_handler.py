@@ -13,8 +13,9 @@ class UserHandler:
             return {"return_code": 401, "message": "요청 데이터가 잘못 되었습니다. 다시 확인해주세요."}
 
         user_id = self.dbm.insert_one(collection="wando_test", document=self.request_data)
-        print(f"[Register User] DB Insert Result:; {user_id}")
+        print(f"[Register User] DB Insert Result:: {user_id}")
 
+        # 알람 스케쥴러 시작
         scheduler = UserScheduler(user_id=user_id)
         scheduler.make_scheduler()
 
