@@ -35,7 +35,7 @@ class UserScheduler:
     def _make_quiz(self) -> None:
         request_body = {}
         # TODO 카테고리에 대한 문제 셋팅
-        
+
         # 파이어베이스 푸시 알림 전송
         fcm_service = FcmHandler(token=self.fcm_token)
         fcm_service.send_message(message_body=request_body)
@@ -52,5 +52,15 @@ class UserScheduler:
 
 
 def convert_day_of_week(day_of_week_list: list) -> str:
-    # TODO day_of_week 리스트를 scheduler.add_job day_of_week 파라미터 포맷에 맞춰서 컨버팅한다.
+    matching_dic = {
+        "월": 0,
+        "화": 1,
+        "수": 2,
+        "목": 3,
+        "금": 4,
+        "토": 5,
+        "일": 6
+    }
+
+    
     return ""
