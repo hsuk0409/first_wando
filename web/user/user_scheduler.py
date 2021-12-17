@@ -53,13 +53,18 @@ class UserScheduler:
 
 def convert_day_of_week(day_of_week_list: list) -> str:
     convert_dic = {
-        "월": 0,
-        "화": 1,
-        "수": 2,
-        "목": 3,
-        "금": 4,
-        "토": 5,
-        "일": 6
+        "월": "mon",
+        "화": "tue",
+        "수": "wed",
+        "목": "thu",
+        "금": "fri",
+        "토": "sat",
+        "일": "sun"
     }
 
-    return "0-6"
+    result = ""
+    for dow in day_of_week_list:
+        if convert_dic.get(dow):
+            result = result + "," + convert_dic.get(dow)
+
+    return result[1:]
