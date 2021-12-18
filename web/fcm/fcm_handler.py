@@ -11,6 +11,7 @@ class FcmHandler:
 
     def send_message(self, message_body: dict):
         data_message = {
+            "title": "시계는 와치",
             "body": message_body
         }
 
