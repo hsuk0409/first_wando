@@ -4,6 +4,8 @@ from bson import ObjectId
 
 from web.db.db_manager import DBManager
 from web.fcm.fcm_handler import FcmHandler
+from web.user.alarm_type import AlarmType
+from web.user.quiz_type import QuizType
 
 dbm = DBManager.get_instance()
 
@@ -33,8 +35,10 @@ class UserScheduler:
             return
 
     def _make_quiz(self) -> None:
-        request_body = {}
-        # TODO 카테고리에 대한 문제 셋팅
+        request_body = {
+            "alarmType": AlarmType.ALARM,
+            # TODO 카테고리에 따른 QuizType, Quiz 셋팅
+        }
 
         # 파이어베이스 푸시 알림 전송
         fcm_service = FcmHandler(token=self.fcm_token)
