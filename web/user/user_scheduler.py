@@ -37,12 +37,21 @@ class UserScheduler:
     def _make_quiz(self) -> None:
         request_body = {
             "alarmType": AlarmType.ALARM,
-            # TODO 카테고리에 따른 QuizType, Quiz 셋팅
+            "quizType": self._get_quiz_type(),
+            "quiz": self._get_quiz()
         }
 
         # 파이어베이스 푸시 알림 전송
         fcm_service = FcmHandler(token=self.fcm_token)
         fcm_service.send_message(message_body=request_body)
+
+    def _get_quiz_type(self) -> str:
+        # TODO 카테고리에 따른 퀴즈 타입 반환
+        return ""
+
+    def _get_quiz(self) -> dict:
+        # TODO 카테고리에 따른 퀴즈 반환
+        return {}
 
     def make_scheduler(self) -> None:
         hour = str(self.time_str).split(":")[0]
