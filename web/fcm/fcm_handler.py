@@ -16,6 +16,7 @@ class FcmHandler:
         }
 
         result = self.fcm_service.single_device_data_message(registration_id=self.token,
+                                                             content_available=True,
                                                              data_message=data_message)
 
         return result
